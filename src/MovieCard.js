@@ -3,7 +3,7 @@ import React from "react";
 const MovieCard = ({ movie, isLoading, keys }) => {
   return (
     <>
-      {isLoading && (
+      {!isLoading && (
         <main
           className="container"
           keys={keys}>

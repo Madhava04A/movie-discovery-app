@@ -94,3 +94,9 @@
   padding: 8px;
   background-color: #252525;
 }
+
+.error-component {
+  margin: 1rem;
+  font-size: 2rem;
+  width: 100%;
+}
