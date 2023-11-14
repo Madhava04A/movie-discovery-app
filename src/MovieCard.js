@@ -4,7 +4,7 @@ const MovieCard = ({ movie, isLoading, keys }) => {
   return (
     <>
       {!isLoading && (
-        <main
+        <article
           className="container"
           key={keys}>
           {movie.Poster !== "N/A" ? (
@@ -22,20 +22,14 @@ const MovieCard = ({ movie, isLoading, keys }) => {
               className="image"
             />
           )}
-          {movie.Title ? (
-            <>
-              <div className="info-container">
-                <p className="year-type-bar">
-                  <span className="year-type">{movie.Year}</span>
-                  <span className="year-type">{movie.Type}</span>
-                </p>
-                <p className="movie-name">{movie.Title}</p>
-              </div>
-            </>
-          ) : (
-            <div className="alt-loading">...Loading</div>
-          )}
-        </main>
+          <div className="info-container">
+            <p className="year-type-bar">
+              <span className="year-type">{movie.Year}</span>
+              <span className="year-type">{movie.Type}</span>
+            </p>
+            <p className="movie-name">{movie.Title}</p>
+          </div>
+        </article>
       )}
     </>
   );

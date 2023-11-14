@@ -2,25 +2,23 @@ import "./App.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
-import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "./ErrorFallback";
 
 function App() {
   const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=1e1fff7a";
-  const [title, setTitle] = useState("");
-  const [movies, setMovies] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState("adventure");
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function searchMovies(name) {
     const res = await fetch(`${API_URL}&s=${name}`);
     const data = await res.json();
     setMovies(data.Search);
-    setIsLoading(false);
+    setTitle("");
   }
 
   useEffect(() => {
-    searchMovies("adventure");
-    setIsLoading(true);
+    searchMovies(title);
+    setIsLoading(false);
   }, []);
 
   return (
@@ -42,26 +40,15 @@ function App() {
           search
         </button>
       </nav>
-
-      {movies ? (
-        <ErrorBoundary
-          FallbackComponent={ErrorFallback}
-          onReset={() => window.history.back()}>
-          {movies.length ? (
-            <div className="display-main-content">
-              {movies.map((movie) => (
-                <MovieCard
-                  movie={movie}
-                  isLoading={isLoading}
-                  keys={movie.imdbID}
-                />
-              ))}
-            </div>
-          ) : (
-            <p>...</p>
-          )}
-        </ErrorBoundary>
-      ) : null}
+      <div className="display-main-content">
+        {movies.map((movie) => (
+          <MovieCard
+            movie={movie}
+            isLoading={isLoading}
+            keys={movie.imdbID}
+          />
+        ))}
+      </div>
     </div>
   );
 }
