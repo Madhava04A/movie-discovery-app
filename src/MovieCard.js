@@ -6,7 +6,7 @@ const MovieCard = ({ movie, isLoading, keys }) => {
       {!isLoading && (
         <main
           className="container"
-          keys={keys}>
+          key={keys}>
           {movie.Poster !== "N/A" ? (
             <img
               src={movie.Poster}
